@@ -15,6 +15,7 @@ import Chords from '../assets/img/Chordzilla.png'
 import Shredding from '../assets/img/Shredding.png'
 import FacebookLogo from '../assets/svg/facebook-app-logo.inline.svg'
 import InstagramLogo from '../assets/svg/instagram.inline.svg'
+import YouTubeLogo from '../assets/svg/youtube.inline.svg'
 import ContactUs from '../assets/svg/contact-us.inline.svg'
 
 import '@reach/tooltip/styles.css'
@@ -27,6 +28,10 @@ const LogoHeroBanner = styled.div`
   height: 100vh;
   width: 100%;
   position: relative;
+
+  @media only screen and (max-width: 767px) {
+    height: 75vh;
+  }
 `
 
 const FeaturedImage = css`
@@ -35,6 +40,14 @@ const FeaturedImage = css`
   background-position: center;
   height: 60vh;
   width: 100%;
+
+  @media only screen and (max-width: 768px) {
+    height: 50vh;
+  }
+
+  @media only screen and (max-width: 500px) {
+    height: 40vh;
+  }
 `
 
 const BandImage = styled.div`
@@ -59,7 +72,7 @@ const SocialsAnchor = styled.div`
 `
 
 const SocialsContainer = styled.div`
-  width: 35%;
+  width: 45%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -69,6 +82,11 @@ const SocialLogo = css`
   height: 36px;
   width: 36px;
   transition: fill 150ms ease-in-out;
+
+  @media only screen and (max-width: 500px) {
+    height: 24px;
+    width: 24px;
+  }
 `
 
 const LinkStyles = css`
@@ -126,8 +144,17 @@ const LocationAwareLink = props => (
   </Location>
 )
 
+const ShowsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
+
 const Show = styled.article`
   display: flex;
+  flex-direction: column;
+  padding-left: 32px;
+  padding-bottom: 32px;
   justify-content: space-around;
 `
 
@@ -135,6 +162,10 @@ const Song = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media only screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 `
 
 const PageSection = styled.section`
@@ -178,7 +209,7 @@ const SocialLinksContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 20%;
+  width: 45%;
   min-height: 100px;
   padding: 0 10%;
 `
@@ -210,6 +241,13 @@ const SocialLinks = () => (
         </ExternalLink>
       </span>
     </Tooltip>
+    <Tooltip label="YouTube">
+      <span>
+        <ExternalLink to="https://www.youtube.com/channel/UCU4XJIUIVtH680j3v7IxK0w">
+          <YouTubeLogo css={SocialLogo} />
+        </ExternalLink>
+      </span>
+    </Tooltip>
     <Tooltip label="Contact Us">
       <span>
         <ExternalLink to="https://forms.gle/NWFYS6k5JUUgXqUi7">
@@ -224,10 +262,10 @@ function HomePage({ data }) {
   const { shows, songs } = data
   const [menuModalOpen, setMenuModalOpen] = React.useState(false)
 
-  const songsInfo = songs.edges.map(({ node }) => node.frontmatter)
-
-  const liveSongs = songsInfo.filter(song => song.recordingType === 'live')
-  const demoSongs = songsInfo.filter(song => song.recordingType === 'demo')
+  const songsInfo = songs.edges.map(({ node }) => node.frontmatter).filter(
+    ({ published }) =>
+      published === true
+  )
   return (
     <Theme>
       <Main>
@@ -266,34 +304,36 @@ function HomePage({ data }) {
         <BandImage css={FeaturedImage} />
         <PageSection id="shows">
           <h2>Shows</h2>
-          {shows.edges.map(({ node }) => {
-            const {
-              city,
-              date,
-              eventUrl,
-              location,
-              locationUrl,
-              title,
-            } = node.frontmatter
-            return (
-              <>
-                <Show>
-                  <span>{date}</span>
-                  <ExternalLink to={eventUrl}>{title}</ExternalLink>
-                  <span>{city}</span>
-                  <ExternalLink to={locationUrl}>{location}</ExternalLink>
-                </Show>
-                <Break />
-              </>
-            )
-          })}
+          <Break />
+          <ShowsContainer>
+            {shows.edges.map(({ node }) => {
+              const {
+                city,
+                date,
+                eventUrl,
+                location,
+                locationUrl,
+                title,
+              } = node.frontmatter
+              return (
+                <>
+                  <Show>
+                    <ExternalLink to={eventUrl}>
+                      <h3>{title}</h3>
+                    </ExternalLink>
+                    <ExternalLink to={locationUrl}>{location}</ExternalLink>
+                    <span>{city} - {date}</span>
+                  </Show>
+                </>
+              )
+            })}
+          </ShowsContainer>
         </PageSection>
         <ShreddingImage css={FeaturedImage} />
         <PageSection id="songs">
           <h2>Songs</h2>
-          <h3>Live</h3>
           <Break />
-          {liveSongs.map(({ name, url }) => (
+          {songsInfo.map(({ name, url }) => (
             <Song>
               <h4>{name}</h4>
               <audio controls>
@@ -302,17 +342,6 @@ function HomePage({ data }) {
               </audio>
             </Song>
           ))}
-          <h3>Demo</h3>
-          {demoSongs.map(({ name, url }) => (
-            <Song>
-              <h4 style={{ marginRight: 36 }}>{name}</h4>
-              <audio controls>
-                <source src={url} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
-            </Song>
-          ))}
-          <Break />
         </PageSection>
         <ChordsImage css={FeaturedImage} />
         <br></br>
@@ -337,7 +366,7 @@ export const pageQuery = graphql`
             type
             name
             url
-            recordingType
+            published
           }
         }
       }

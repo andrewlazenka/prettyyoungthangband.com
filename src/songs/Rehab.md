@@ -3,4 +3,5 @@
   name: 'Rehab'
   url: '/audio/Rehab.mp3'
   recordingType: 'live'
+  published: true
 ---

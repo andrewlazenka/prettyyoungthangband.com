@@ -7,12 +7,14 @@ const top3 = '40px'
 
 const HamburgerMenuContainerStyled = css`
   cursor: pointer;
-  position: relative;
+  position: absolute;
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
   height: 100%;
   width: 32px;
   z-index: 20;
+  top: 0;
+  right: 40px;
 
   span:nth-child(1) {
     top: ${top1};
