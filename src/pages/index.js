@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { Location } from '@reach/router'
 import Tooltip from '@reach/tooltip'
 import { Link, graphql } from 'gatsby'
+import { Helmet } from 'react-helmet'
 
 import Footer from '../components/Footer'
 import HamburgerMenu from '../components/HamburgerMenu'
@@ -12,7 +13,9 @@ import Theme from '../components/Theme'
 import PYTLogo from '../assets/img/PrettyYoungThangLogo.png'
 import Band from '../assets/img/Band.png'
 import Chords from '../assets/img/Chordzilla.png'
-import Shredding from '../assets/img/Shredding.png'
+import IsaacPhoto from '../assets/img/SuperSaiyanIsaac.jpg'
+import VibesPhoto from '../assets/img/VibesAtTrin.jpg'
+
 import FacebookLogo from '../assets/svg/facebook-app-logo.inline.svg'
 import InstagramLogo from '../assets/svg/instagram.inline.svg'
 import YouTubeLogo from '../assets/svg/youtube.inline.svg'
@@ -50,6 +53,20 @@ const FeaturedImage = css`
   }
 `
 
+const SideBySideImages = styled.div`
+  height: 60vh;
+  width: 100%;
+  position: relative;
+
+  @media only screen and (max-width: 768px) {
+    height: 50vh;
+  }
+
+  @media only screen and (max-width: 500px) {
+    height: 40vh;
+  }
+`
+
 const BandImage = styled.div`
   background: url(${Band});
 `
@@ -58,8 +75,24 @@ const ChordsImage = styled.div`
   background: url(${Chords});
 `
 
-const ShreddingImage = styled.div`
-  background: url(${Shredding});
+const IsaacImage = styled.div`
+  background: url(${IsaacPhoto});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50%;
+  height: inherit;
+  position: absolute;
+  right: 0px;
+`
+
+const VibesImage = styled.div`
+  background: url(${VibesPhoto});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50%;
+  height: inherit;
+  position: absolute;
+  left: 0px;
 `
 
 const Main = styled.main``
@@ -154,6 +187,7 @@ const Show = styled.article`
   display: flex;
   flex-direction: column;
   padding-left: 32px;
+  padding-right: 32px;
   padding-bottom: 32px;
   justify-content: space-around;
 `
@@ -162,6 +196,8 @@ const Song = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 32px;
+  padding-right: 32px;
 
   @media only screen and (max-width: 500px) {
     flex-direction: column;
@@ -268,6 +304,7 @@ function HomePage({ data }) {
   )
   return (
     <Theme>
+      <Helmet title="Pretty Young Thang" />
       <Main>
         <section>
           <LogoHeroBanner>
@@ -303,7 +340,7 @@ function HomePage({ data }) {
         </section>
         <BandImage css={FeaturedImage} />
         <PageSection id="shows">
-          <h2>Shows</h2>
+          <h2>Upcoming Shows</h2>
           <Break />
           <ShowsContainer>
             {shows.edges.map(({ node }) => {
@@ -329,7 +366,10 @@ function HomePage({ data }) {
             })}
           </ShowsContainer>
         </PageSection>
-        <ShreddingImage css={FeaturedImage} />
+        <SideBySideImages>
+          <IsaacImage />
+          <VibesImage />
+        </SideBySideImages>
         <PageSection id="songs">
           <h2>Songs</h2>
           <Break />
