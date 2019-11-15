@@ -1,4 +1,5 @@
 import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import { ExternalLink } from './Links'
@@ -18,30 +19,47 @@ const Show = styled.article`
   justify-content: space-around;
 `
 
-function UpcomingShows({ shows }) {
+function UpcomingShows() {
+  const data = useStaticQuery(graphql`
+    query Shows {
+      allMarkdownRemark(
+        filter: { fileAbsolutePath: { glob: "**/src/shows/*.md" } }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              eventUrl
+              city
+              date
+              location
+              locationUrl
+              title
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const showsInfo = data.allMarkdownRemark.edges.map(
+    ({ node }) => node.frontmatter
+  )
+
   return (
     <ShowsContainer>
-      {shows.map(({
-          city,
-          date,
-          eventUrl,
-          location,
-          locationUrl,
-          title,
-        }) => (
-          <>
-            <Show>
-              <ExternalLink to={eventUrl}>
-                <h3>{title}</h3>
-              </ExternalLink>
-              <ExternalLink to={locationUrl}>{location}</ExternalLink>
-              <span>
-                {city} - {date}
-              </span>
-            </Show>
-          </>
-        )
-      )}
+      {showsInfo.map(({ city, date, eventUrl, location, locationUrl, title }) => (
+        <>
+          <Show>
+            <ExternalLink to={eventUrl}>
+              <h3>{title}</h3>
+            </ExternalLink>
+            <ExternalLink to={locationUrl}>{location}</ExternalLink>
+            <span>
+              {city} - {date}
+            </span>
+          </Show>
+        </>
+      ))}
     </ShowsContainer>
   )
 }

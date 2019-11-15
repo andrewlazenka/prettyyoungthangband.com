@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
 import {
@@ -29,75 +28,29 @@ const Break = styled.hr`
   width: 100%;
 `
 
-function HomePage({ data }) {
-  const { shows, songs } = data
-
-  const songsInfo = songs.edges
-    .map(({ node }) => node.frontmatter)
-    .filter(({ published }) => published === true)
-
-  const showsInfo = shows.edges
-    .map(({ node }) => node.frontmatter)
-
-  return (
-    <Theme>
-      <Helmet title="Pretty Young Thang" />
-      <main>
-        <section>
-          <HeroBanner />
-        </section>
-        <BandImage />
-        <PageSection id="shows">
-          <h2>Upcoming Shows</h2>
-          <Break />
-          <UpcomingShows shows={showsInfo} />
-        </PageSection>
-        <TrinSideBySideImages />
-        <PageSection id="songs">
-          <h2>Songs</h2>
-          <Break />
-          <Songs songs={songsInfo} />
-        </PageSection>
-        <ChordsImage />
-      </main>
-      <Footer />
-    </Theme>
-  )
-}
+const HomePage = () => (
+  <Theme>
+    <Helmet title="Pretty Young Thang" />
+    <main>
+      <section>
+        <HeroBanner />
+      </section>
+      <BandImage />
+      <PageSection id="shows">
+        <h2>Upcoming Shows</h2>
+        <Break />
+        <UpcomingShows />
+      </PageSection>
+      <TrinSideBySideImages />
+      <PageSection id="songs">
+        <h2>Songs</h2>
+        <Break />
+        <Songs />
+      </PageSection>
+      <ChordsImage />
+    </main>
+    <Footer />
+  </Theme>
+)
 
 export default HomePage
-
-export const pageQuery = graphql`
-  {
-    songs: allMarkdownRemark(
-      filter: { fileAbsolutePath: { glob: "**/src/songs/*.md" } }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            type
-            name
-            url
-            published
-          }
-        }
-      }
-    }
-    shows: allMarkdownRemark(
-      filter: { fileAbsolutePath: { glob: "**/src/shows/*.md" } }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            eventUrl
-            city
-            date
-            location
-            locationUrl
-            title
-          }
-        }
-      }
-    }
-  }
-`
