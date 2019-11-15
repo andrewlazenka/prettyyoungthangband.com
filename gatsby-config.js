@@ -44,11 +44,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Andrew Lazenka`,
-        short_name: `Andrew Lazenka`,
+        name: `Pretty Young Thang Band`,
+        short_name: `PYT`,
         start_url: `/`,
         background_color: `#0aa1d2`,
-        theme_color: `#0aa1d2`,
+        theme_color: `#e000a3`,
         display: `standalone`,
         icon: `static/favicon.png`,
       },
@@ -64,15 +64,5 @@ module.exports = {
         },
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: process.env.GATSBY_GA_TRACKING_ID,
-    //     head: true,
-    //     sampleRate: 5,
-    //     siteSpeedSampleRate: 10,
-    //     cookieDomain: 'prettyyoungthangband.com',
-    //   },
-    // },
   ],
 }
