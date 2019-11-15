@@ -40,7 +40,7 @@ function Songs() {
 
   return songsInfo.map(({ name, url }) => {
     return (
-      <Song>
+      <Song key={url}>
         <h4>{name}</h4>
         <audio controls>
           <source src={url} type="audio/mpeg" />

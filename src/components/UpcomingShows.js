@@ -48,7 +48,7 @@ function UpcomingShows() {
   return (
     <ShowsContainer>
       {showsInfo.map(({ city, date, eventUrl, location, locationUrl, title }) => (
-        <>
+        <React.Fragment key={eventUrl}>
           <Show>
             <ExternalLink to={eventUrl}>
               <h3>{title}</h3>
@@ -58,7 +58,7 @@ function UpcomingShows() {
               {city} - {date}
             </span>
           </Show>
-        </>
+        </React.Fragment>
       ))}
     </ShowsContainer>
   )
