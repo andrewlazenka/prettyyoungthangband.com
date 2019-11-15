@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import SocialLinks from '../components/SocialLinks'
+
 const FooterContainer = styled.footer`
   display: flex;
   align-items: center;
@@ -19,11 +21,11 @@ const FooterContainerInterior = styled.div`
   margin: 0 auto;
 `
 
-function Footer({ children }) {
+function Footer() {
   return (
     <FooterContainer>
       <FooterContainerInterior>
-        {children}
+        <SocialLinks />
       </FooterContainerInterior>
     </FooterContainer>
   )
