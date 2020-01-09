@@ -28,6 +28,12 @@ const Break = styled.hr`
   width: 100%;
 `
 
+const FrameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 const HomePage = () => (
   <Theme>
     <Helmet title="Pretty Young Thang" />
@@ -48,13 +54,11 @@ const HomePage = () => (
       </PageSection>
       <TrinSideBySideImages />
       <PageSection>
-        <div
-          style={{ display: 'flex', alignItems: 'center' }}
-        >
+        <FrameWrapper>
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLScsYfl9SrUtURHr52G_36pGGw6ue_FjRJMH5Ufl0snW3ku1PQ/viewform?embedded=true"
             width="640"
-            height="677"
+            height="725"
             frameborder="0"
             marginheight="0"
             marginwidth="0"
@@ -62,7 +66,7 @@ const HomePage = () => (
           >
             Loading…
           </iframe>
-        </div>
+        </FrameWrapper>
       </PageSection>
       <ChordsImage />
     </main>
