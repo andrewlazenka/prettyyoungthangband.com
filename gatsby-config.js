@@ -54,8 +54,6 @@ module.exports = {
       },
       display: `swap`,
     },
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {

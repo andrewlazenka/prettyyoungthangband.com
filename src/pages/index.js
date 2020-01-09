@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 import HeroBanner from '../components/HeroBanner'
 import Songs from '../components/Songs'
 import Theme from '../components/Theme'
-import UpcomingShows from '../components/UpcomingShows'
+// import UpcomingShows from '../components/UpcomingShows'
 
 const PageSection = styled.section`
   width: 90%;
@@ -36,16 +36,33 @@ const HomePage = () => (
         <HeroBanner />
       </section>
       <BandImage />
-      <PageSection id="shows">
+      {/* <PageSection id="shows">
         <h2>Upcoming Shows</h2>
         <Break />
         <UpcomingShows />
-      </PageSection>
-      <TrinSideBySideImages />
+      </PageSection> */}
       <PageSection id="songs">
         <h2>Songs</h2>
         <Break />
         <Songs />
+      </PageSection>
+      <TrinSideBySideImages />
+      <PageSection>
+        <div
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLScsYfl9SrUtURHr52G_36pGGw6ue_FjRJMH5Ufl0snW3ku1PQ/viewform?embedded=true"
+            width="640"
+            height="677"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Pretty Young Thang - Contact Us"
+          >
+            Loading…
+          </iframe>
+        </div>
       </PageSection>
       <ChordsImage />
     </main>
