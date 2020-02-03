@@ -38,10 +38,8 @@ const FrameWrapper = styled.div`
 const HomePage = () => (
   <Theme>
     <Helmet title="Pretty Young Thang" />
-    <main>
-      <section>
-        <HeroBanner />
-      </section>
+    <HeroBanner />
+    <main style={{ background: '#eee' }}>
       <BandImage />
       {/* <PageSection id="shows">
         <h2>Upcoming Shows</h2>

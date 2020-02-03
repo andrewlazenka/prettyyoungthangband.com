@@ -71,7 +71,7 @@ function Songs() {
 
   return songsInfo.map(({ name, url, bandcampUrl, youtubeUrl }) => {
     return (
-      <Song key={url}>
+      <Song key={name}>
         <h4>{name}</h4>
         <SongContents>
           {bandcampUrl &&
