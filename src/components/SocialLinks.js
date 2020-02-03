@@ -9,6 +9,7 @@ import FacebookLogo from '../assets/svg/facebook-app-logo.inline.svg'
 import InstagramLogo from '../assets/svg/instagram.inline.svg'
 import YouTubeLogo from '../assets/svg/youtube.inline.svg'
 import ContactUs from '../assets/svg/contact-us.inline.svg'
+import Bandcamp from '../assets/svg/bandcamp.inline.svg'
 
 const SocialLogo = css`
   height: 36px;
@@ -39,8 +40,15 @@ export default () => (
     </Tooltip>
     <Tooltip label="YouTube">
       <span>
-        <ExternalLink to="https://www.youtube.com/channel/UCU4XJIUIVtH680j3v7IxK0w">
+        <ExternalLink to="https://www.youtube.com/channel/UCc31B5W6QVIvp9X202e-Q2Q">
           <YouTubeLogo css={SocialLogo} />
+        </ExternalLink>
+      </span>
+    </Tooltip>
+    <Tooltip label="Bandcamp">
+      <span>
+        <ExternalLink to="https://prettyyoungthang.bandcamp.com">
+          <Bandcamp css={SocialLogo} />
         </ExternalLink>
       </span>
     </Tooltip>

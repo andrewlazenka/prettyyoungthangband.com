@@ -67,10 +67,10 @@ const SocialLinksContainer = styled.div`
 `
 
 const MENU_ITEMS = [
-  {
-    name: 'Shows',
-    to: '/#shows',
-  },
+  // {
+  //   name: 'Shows',
+  //   to: '/#shows',
+  // },
   {
     name: 'Songs',
     to: '/#songs',

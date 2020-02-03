@@ -11,6 +11,7 @@ import Footer from '../components/Footer'
 import HeroBanner from '../components/HeroBanner'
 import Songs from '../components/Songs'
 import Theme from '../components/Theme'
+import { ExternalLink } from '../components/Links'
 // import UpcomingShows from '../components/UpcomingShows'
 
 const PageSection = styled.section`
@@ -48,7 +49,18 @@ const HomePage = () => (
         <UpcomingShows />
       </PageSection> */}
       <PageSection id="songs">
-        <h2>Songs</h2>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <h2 style={{ margin: 0 }}>Songs</h2>
+          <ExternalLink to="https://prettyyoungthang.bandcamp.com/releases">
+            Find us on Bandcamp
+          </ExternalLink>
+        </div>
         <Break />
         <Songs />
       </PageSection>
@@ -56,19 +68,32 @@ const HomePage = () => (
       <PageSection>
         <FrameWrapper>
           <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/A5wcmKWODo8"
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Nobody's Babe Music Video"
+          />
+        </FrameWrapper>
+      </PageSection>
+      <ChordsImage />
+      <PageSection>
+        <FrameWrapper>
+          <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLScsYfl9SrUtURHr52G_36pGGw6ue_FjRJMH5Ufl0snW3ku1PQ/viewform?embedded=true"
             width="640"
             height="725"
-            frameborder="0"
-            marginheight="0"
-            marginwidth="0"
+            frameBorder="0"
+            marginHeight="0"
+            marginWidth="0"
             title="Pretty Young Thang - Contact Us"
           >
             Loading…
           </iframe>
         </FrameWrapper>
       </PageSection>
-      <ChordsImage />
     </main>
     <Footer />
   </Theme>

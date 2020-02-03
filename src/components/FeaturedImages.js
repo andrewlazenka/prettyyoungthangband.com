@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import BandPhoto from '../assets/img/Band.png'
+import BandPhoto from '../assets/img/GuitarsAndBars.jpg'
 import ChordsPhoto from '../assets/img/Chordzilla.png'
 import IsaacPhoto from '../assets/img/SuperSaiyanIsaac.jpg'
 import VibesPhoto from '../assets/img/VibesAtTrin.jpg'

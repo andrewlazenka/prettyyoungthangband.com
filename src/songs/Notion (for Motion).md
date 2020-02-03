@@ -1,7 +1,7 @@
 ---
   type: 'original'
   name: 'Notion (for Motion)'
-  url: '/audio/Notion (for Motion).mp3'
+  youtubeUrl: "https://www.youtube.com/watch?v=1-tfwVOxpSs"
   recordingType: 'demo'
-  published: false
+  published: true
 ---
