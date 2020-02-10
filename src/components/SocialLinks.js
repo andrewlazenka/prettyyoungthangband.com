@@ -3,13 +3,14 @@ import { css } from 'styled-components'
 import Tooltip from '@reach/tooltip'
 import '@reach/tooltip/styles.css'
 
-import { ExternalLink } from '../components/Links'
+import { ExternalLink, A } from '../components/Links'
 
 import FacebookLogo from '../assets/svg/facebook-app-logo.inline.svg'
 import InstagramLogo from '../assets/svg/instagram.inline.svg'
 import YouTubeLogo from '../assets/svg/youtube.inline.svg'
 import ContactUs from '../assets/svg/contact-us.inline.svg'
-import Bandcamp from '../assets/svg/bandcamp.inline.svg'
+import BandcampLogo from '../assets/svg/bandcamp.inline.svg'
+import SpotifyLogo from '../assets/svg/spotify.inline.svg'
 
 const SocialLogo = css`
   height: 36px;
@@ -24,10 +25,17 @@ const SocialLogo = css`
 
 export default () => (
   <>
-    <Tooltip label="Facebook">
+    <Tooltip label="Spotify">
       <span>
-        <ExternalLink to="https://www.facebook.com/PrettyYoungThangBand">
-          <FacebookLogo css={SocialLogo} />
+        <A to="spotify:artist:6npRHU3Tz5dAPa4AGKBG3w">
+          <SpotifyLogo css={SocialLogo} />
+        </A>
+      </span>
+    </Tooltip>
+    <Tooltip label="Bandcamp">
+      <span>
+        <ExternalLink to="https://prettyyoungthang.bandcamp.com">
+          <BandcampLogo css={SocialLogo} />
         </ExternalLink>
       </span>
     </Tooltip>
@@ -38,17 +46,17 @@ export default () => (
         </ExternalLink>
       </span>
     </Tooltip>
+    <Tooltip label="Facebook">
+      <span>
+        <ExternalLink to="https://www.facebook.com/PrettyYoungThangBand">
+          <FacebookLogo css={SocialLogo} />
+        </ExternalLink>
+      </span>
+    </Tooltip>
     <Tooltip label="YouTube">
       <span>
         <ExternalLink to="https://www.youtube.com/channel/UCc31B5W6QVIvp9X202e-Q2Q">
           <YouTubeLogo css={SocialLogo} />
-        </ExternalLink>
-      </span>
-    </Tooltip>
-    <Tooltip label="Bandcamp">
-      <span>
-        <ExternalLink to="https://prettyyoungthang.bandcamp.com">
-          <Bandcamp css={SocialLogo} />
         </ExternalLink>
       </span>
     </Tooltip>

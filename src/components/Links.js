@@ -30,6 +30,16 @@ export const ExternalLink = ({ to, children, ...props }) => (
   </a>
 )
 
+export const A = ({ to, children, ...props }) => (
+  <a
+    css={LinkStyles}
+    href={to}
+    {...props}
+  >
+    {children}
+  </a>
+)
+
 export const InternalLink = props => <Link css={LinkStyles} {...props} />
 
 export const LocationAwareLink = props => (

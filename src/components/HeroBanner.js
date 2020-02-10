@@ -10,8 +10,8 @@ import PYTLogo from '../assets/img/PrettyYoungThangLogo.png'
 const LogoHeroBanner = styled.div`
   background: url(${PYTLogo});
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  background-size: 60%;
+  background-position: 50% 40%;
   height: 100vh;
   width: 100%;
   position: relative;

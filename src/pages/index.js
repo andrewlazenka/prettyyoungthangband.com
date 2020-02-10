@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 import HeroBanner from '../components/HeroBanner'
 import Songs from '../components/Songs'
 import Theme from '../components/Theme'
-import { ExternalLink } from '../components/Links'
+import { A } from '../components/Links'
 // import UpcomingShows from '../components/UpcomingShows'
 
 const PageSection = styled.section`
@@ -55,9 +55,9 @@ const HomePage = () => (
           }}
         >
           <h2 style={{ margin: 0 }}>Songs</h2>
-          <ExternalLink to="https://prettyyoungthang.bandcamp.com/releases">
-            Find us on Bandcamp
-          </ExternalLink>
+          <A to="spotify:artist:6npRHU3Tz5dAPa4AGKBG3w">
+            Listen on Spotify
+          </A>
         </div>
         <Break />
         <Songs />

@@ -16,8 +16,8 @@ const FooterContainerInterior = styled.div`
   justify-content: space-between;
   background-color: ${({ theme }) => theme.footerBgColor};
   padding: 0 1.3125rem;
-  width: 40%;
-  max-width: 850px;
+  width: 70%;
+  max-width: 450px;
   margin: 0 auto;
 `
 
