@@ -5,6 +5,9 @@ import Tooltip from '@reach/tooltip'
 import '@reach/tooltip/styles.css'
 
 import { ExternalLink } from '../components/Links'
+import AppleLogo from '../assets/svg/apple.inline.svg'
+import BandcampLogo from '../assets/svg/bandcamp.inline.svg'
+import SpotifyLogo from '../assets/svg/spotify.inline.svg'
 import YouTubeLogo from '../assets/svg/youtube.inline.svg'
 
 const Song = styled.div`
@@ -26,10 +29,6 @@ const SongContents = styled.span`
   @media only screen and (max-width: 450px) {
     flex-direction: column;
   }
-`
-
-const playerStyle = css`
-  width: 300px;
 `
 
 const SocialLogo = css`
@@ -55,8 +54,10 @@ function Songs() {
               type
               name
               url
+              appleMusicUrl
               youtubeUrl
               bandcampUrl
+              spotifyUrl
               published
             }
           }
@@ -68,30 +69,39 @@ function Songs() {
   const songsInfo = data.allMarkdownRemark.edges
     .map(({ node }) => node.frontmatter)
     .filter(({ published }) => published === true)
+    .sort((s1, s2) => s1.name > s2.name ? 1 : -1)
 
-  return songsInfo.map(({ name, url, bandcampUrl, youtubeUrl }) => {
+  return songsInfo.map(({ name, appleMusicUrl, bandcampUrl, youtubeUrl, spotifyUrl }) => {
     return (
       <Song key={name}>
         <h4>{name}</h4>
         <SongContents>
-          {bandcampUrl &&
-            <iframe
-              title={name}
-              style={{ border: 0, height: '42px' }}
-              css={playerStyle}
-              src="https://bandcamp.com/EmbeddedPlayer/track=3858596418/size=small/bgcol=333333/linkcol=e000a3/transparent=true"
-              seamless
-            >
-              <a href={bandcampUrl}>
-                {name} by Pretty Young Thang
-              </a>
-            </iframe>
+          {spotifyUrl &&
+            <Tooltip label="Listen on Spotify">
+              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
+                <ExternalLink to={spotifyUrl}>
+                  <SpotifyLogo css={SocialLogo} />
+                </ExternalLink>
+              </span>
+            </Tooltip>
           }
-          {!bandcampUrl && url &&
-            <audio controls css={playerStyle}>
-              <source src={url} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
+          {spotifyUrl &&
+            <Tooltip label="Listen on Apple Music">
+              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
+                <ExternalLink to={appleMusicUrl}>
+                  <AppleLogo css={SocialLogo} />
+                </ExternalLink>
+              </span>
+            </Tooltip>
+          }
+          {bandcampUrl &&
+            <Tooltip label="Listen on Bandcamp">
+              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
+                <ExternalLink to={bandcampUrl}>
+                  <BandcampLogo css={SocialLogo} />
+                </ExternalLink>
+              </span>
+            </Tooltip>
           }
           {youtubeUrl &&
             <Tooltip label="Watch on YouTube">
@@ -102,6 +112,12 @@ function Songs() {
               </span>
             </Tooltip>
           }
+          {/* {!bandcampUrl && url &&
+            <audio controls css={playerStyle}>
+              <source src={url} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+          } */}
         </SongContents>
       </Song>
     )})

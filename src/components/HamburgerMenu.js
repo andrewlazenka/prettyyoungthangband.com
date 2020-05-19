@@ -71,7 +71,7 @@ const HamburgerMenu = ({ active, onClick }) => {
     style = [...style, ...HamburgerMenuContainerOpenStyle]
   }
   return (
-    <div onClick={onClick} css={style}>
+    <div onClick={onClick} onKeyPress={onClick} css={style} role="button" tabIndex={0}>
       <HamburgerMenuStrip />
       <HamburgerMenuStrip />
       <HamburgerMenuStrip />

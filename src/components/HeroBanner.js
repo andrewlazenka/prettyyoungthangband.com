@@ -75,6 +75,14 @@ const MENU_ITEMS = [
     name: 'Songs',
     to: '/#songs',
   },
+  {
+    name: "Featured Video",
+    to: "/#featured-video"
+  },
+  {
+    name: "Contact Us",
+    to: "/#contact-us"
+  }
 ]
 
 function HeroBanner() {

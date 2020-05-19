@@ -63,7 +63,7 @@ const HomePage = () => (
         <Songs />
       </PageSection>
       <TrinSideBySideImages />
-      <PageSection>
+      <PageSection id="featured-video">
         <FrameWrapper>
           <iframe
             width="560"
@@ -77,7 +77,7 @@ const HomePage = () => (
         </FrameWrapper>
       </PageSection>
       <ChordsImage />
-      <PageSection>
+      <PageSection id="contact-us">
         <FrameWrapper>
           <iframe
             src="https://docs.google.com/forms/d/e/1FAIpQLScsYfl9SrUtURHr52G_36pGGw6ue_FjRJMH5Ufl0snW3ku1PQ/viewform?embedded=true"
