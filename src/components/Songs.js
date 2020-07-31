@@ -6,7 +6,6 @@ import '@reach/tooltip/styles.css'
 
 import { ExternalLink } from '../components/Links'
 import AppleLogo from '../assets/svg/apple.inline.svg'
-import BandcampLogo from '../assets/svg/bandcamp.inline.svg'
 import SpotifyLogo from '../assets/svg/spotify.inline.svg'
 import YouTubeLogo from '../assets/svg/youtube.inline.svg'
 
@@ -56,7 +55,6 @@ function Songs() {
               url
               appleMusicUrl
               youtubeUrl
-              bandcampUrl
               spotifyUrl
               published
             }
@@ -71,7 +69,7 @@ function Songs() {
     .filter(({ published }) => published === true)
     .sort((s1, s2) => s1.name > s2.name ? 1 : -1)
 
-  return songsInfo.map(({ name, appleMusicUrl, bandcampUrl, youtubeUrl, spotifyUrl }) => {
+  return songsInfo.map(({ name, appleMusicUrl, youtubeUrl, spotifyUrl }) => {
     return (
       <Song key={name}>
         <h4>{name}</h4>
@@ -94,15 +92,6 @@ function Songs() {
               </span>
             </Tooltip>
           }
-          {bandcampUrl &&
-            <Tooltip label="Listen on Bandcamp">
-              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
-                <ExternalLink to={bandcampUrl}>
-                  <BandcampLogo css={SocialLogo} />
-                </ExternalLink>
-              </span>
-            </Tooltip>
-          }
           {youtubeUrl &&
             <Tooltip label="Watch on YouTube">
               <span style={{ paddingLeft: 18, paddingTop: 18 }}>
@@ -112,12 +101,6 @@ function Songs() {
               </span>
             </Tooltip>
           }
-          {/* {!bandcampUrl && url &&
-            <audio controls css={playerStyle}>
-              <source src={url} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-          } */}
         </SongContents>
       </Song>
     )})

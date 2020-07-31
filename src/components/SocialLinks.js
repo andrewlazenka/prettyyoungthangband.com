@@ -9,7 +9,6 @@ import AppleLogo from '../assets/svg/apple.inline.svg'
 import FacebookLogo from '../assets/svg/facebook-app-logo.inline.svg'
 import InstagramLogo from '../assets/svg/instagram.inline.svg'
 import YouTubeLogo from '../assets/svg/youtube.inline.svg'
-import BandcampLogo from '../assets/svg/bandcamp.inline.svg'
 import SpotifyLogo from '../assets/svg/spotify.inline.svg'
 
 const SocialLogo = css`
@@ -36,13 +35,6 @@ export default () => (
       <span>
         <ExternalLink to="https://music.apple.com/us/artist/pretty-young-thang/1497863142">
           <AppleLogo css={SocialLogo} />
-        </ExternalLink>
-      </span>
-    </Tooltip>
-    <Tooltip label="Bandcamp">
-      <span>
-        <ExternalLink to="https://prettyyoungthang.bandcamp.com">
-          <BandcampLogo css={SocialLogo} />
         </ExternalLink>
       </span>
     </Tooltip>
