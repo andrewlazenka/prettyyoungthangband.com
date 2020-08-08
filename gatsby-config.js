@@ -2,7 +2,9 @@ const path = require('path')
 
 module.exports = {
   siteMetadata: {
-    title: 'Snippets',
+    description: "Alternative, funk, rock band from Toronto, ON. Bringing you all the razzle with twice the dazzle ✨",
+    siteUrl: 'https://prettyyoungthangband.com',
+    title: 'Pretty Young Thang',
   },
   plugins: [
     {

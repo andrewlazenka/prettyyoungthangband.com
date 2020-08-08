@@ -1,18 +1,18 @@
+import { graphql } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import { Helmet } from 'react-helmet'
 
 import {
   BandImage,
   ChordsImage,
   TrinSideBySideImages,
 } from '../components/FeaturedImages'
-import PYTLogo from '../assets/img/PrettyYoungThangLogo.png'
 import Footer from '../components/Footer'
 import HeroBanner from '../components/HeroBanner'
+import { A } from '../components/Links'
+import Head from '../components/Head'
 import Songs from '../components/Songs'
 import Theme from '../components/Theme'
-import { A } from '../components/Links'
 // import UpcomingShows from '../components/UpcomingShows'
 
 const PageSection = styled.section`
@@ -33,14 +33,12 @@ const Break = styled.hr`
 const FrameWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: ${props => props.children.length > 1 ? 'space-between' : 'center'};
+  justify-content: ${(props) =>
+    props.children.length > 1 ? 'space-between' : 'center'};
   flex-wrap: wrap;
 `
 
-const metaDescription = "Pretty Young Thang brings you all the razzle with twice the dazzle. We are a funk, alternative, rock band from Toronto, ON.";
-const metaTitle = "Pretty Young Thang Band";
-
-const FeaturedVideo = props => (
+const FeaturedVideo = ({ src, title = 'Frame Title' }) => (
   <iframe
     width="560"
     height="315"
@@ -48,23 +46,14 @@ const FeaturedVideo = props => (
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
     allowFullScreen
     style={{ margin: '0 auto', paddingBottom: 16 }}
-    {...props}
+    src={src}
+    title={title}
   />
 )
 
-const HomePage = () => (
+const HomePage = ({ data }) => (
   <Theme>
-    <Helmet title="Pretty Young Thang">
-      <meta property="og:description" content={metaDescription} />
-      <meta property="og:image" content={PYTLogo} />
-      <meta property="og:site_name" content="Pretty Young Thang" />
-      <meta property="og:title" content={metaTitle} />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://prettyyoungthangband.com" />
-      <meta name="twitter:title" content={metaTitle} />
-      <meta name="twitter:description" content={metaDescription} />
-      <meta name="twitter:image" content={PYTLogo} />
-    </Helmet>
+    <Head />
     <HeroBanner />
     <main style={{ background: '#eee' }}>
       <BandImage />
@@ -82,9 +71,7 @@ const HomePage = () => (
           }}
         >
           <h2 style={{ margin: 0 }}>Songs</h2>
-          <A to="spotify:artist:6npRHU3Tz5dAPa4AGKBG3w">
-            Listen on Spotify
-          </A>
+          <A to="spotify:artist:6npRHU3Tz5dAPa4AGKBG3w">Listen on Spotify</A>
         </div>
         <Break />
         <Songs />
@@ -132,5 +119,17 @@ const HomePage = () => (
     <Footer />
   </Theme>
 )
+
+export const query = graphql`
+  query SiteTitle {
+    site {
+      siteMetadata {
+        description
+        siteUrl
+        title
+      }
+    }
+  }
+`
 
 export default HomePage
