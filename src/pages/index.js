@@ -7,6 +7,7 @@ import {
   ChordsImage,
   TrinSideBySideImages,
 } from '../components/FeaturedImages'
+import PYTLogo from '../assets/img/PrettyYoungThangLogo.png'
 import Footer from '../components/Footer'
 import HeroBanner from '../components/HeroBanner'
 import Songs from '../components/Songs'
@@ -16,7 +17,7 @@ import { A } from '../components/Links'
 
 const PageSection = styled.section`
   width: 90%;
-  padding: 2.5% 2.5% 5% 2.5%;
+  padding: 2.5% 2.5% 2.5% 2.5%;
   max-width: 1150px;
   margin: 0 auto;
 `
@@ -33,11 +34,37 @@ const FrameWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: ${props => props.children.length > 1 ? 'space-between' : 'center'};
+  flex-wrap: wrap;
 `
+
+const metaDescription = "Pretty Young Thang brings you all the razzle with twice the dazzle. We are a funk, alternative, rock band from Toronto, ON.";
+const metaTitle = "Pretty Young Thang Band";
+
+const FeaturedVideo = props => (
+  <iframe
+    width="560"
+    height="315"
+    frameBorder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+    style={{ margin: '0 auto', paddingBottom: 16 }}
+    {...props}
+  />
+)
 
 const HomePage = () => (
   <Theme>
-    <Helmet title="Pretty Young Thang" />
+    <Helmet title="Pretty Young Thang">
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:image" content={PYTLogo} />
+      <meta property="og:site_name" content="Pretty Young Thang" />
+      <meta property="og:title" content={metaTitle} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://prettyyoungthangband.com" />
+      <meta name="twitter:title" content={metaTitle} />
+      <meta name="twitter:description" content={metaDescription} />
+      <meta name="twitter:image" content={PYTLogo} />
+    </Helmet>
     <HeroBanner />
     <main style={{ background: '#eee' }}>
       <BandImage />
@@ -75,22 +102,12 @@ const HomePage = () => (
         </div>
         <Break />
         <FrameWrapper>
-          <iframe
-            width="560"
-            height="315"
+          <FeaturedVideo
             src="https://www.youtube.com/embed/WLHFvKTXRPQ"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
             title="March of the Degenerates Music Video"
           />
-          <iframe
-            width="560"
-            height="315"
+          <FeaturedVideo
             src="https://www.youtube.com/embed/F-cTTZZMuz8"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
             title="Walking Out on Your Financials Music Video"
           />
         </FrameWrapper>
