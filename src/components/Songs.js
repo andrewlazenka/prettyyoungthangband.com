@@ -83,7 +83,7 @@ function Songs() {
               </span>
             </Tooltip>
           }
-          {spotifyUrl &&
+          {appleMusicUrl &&
             <Tooltip label="Listen on Apple Music">
               <span style={{ paddingLeft: 18, paddingTop: 18 }}>
                 <ExternalLink to={appleMusicUrl}>

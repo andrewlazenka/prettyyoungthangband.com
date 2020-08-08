@@ -32,7 +32,7 @@ const Break = styled.hr`
 const FrameWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: ${props => props.children.length > 1 ? 'space-between' : 'center'};
 `
 
 const HomePage = () => (
@@ -64,7 +64,26 @@ const HomePage = () => (
       </PageSection>
       <TrinSideBySideImages />
       <PageSection id="featured-video">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <h2 style={{ margin: 0 }}>Featured Videos</h2>
+        </div>
+        <Break />
         <FrameWrapper>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/WLHFvKTXRPQ"
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="March of the Degenerates Music Video"
+          />
           <iframe
             width="560"
             height="315"
@@ -72,7 +91,7 @@ const HomePage = () => (
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            title="Nobody's Babe Music Video"
+            title="Walking Out on Your Financials Music Video"
           />
         </FrameWrapper>
       </PageSection>

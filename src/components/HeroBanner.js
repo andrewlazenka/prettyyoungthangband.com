@@ -76,7 +76,7 @@ const MENU_ITEMS = [
     to: '/#songs',
   },
   {
-    name: "Featured Video",
+    name: "Featured Videos",
     to: "/#featured-video"
   },
   {
