@@ -26,9 +26,9 @@ const SongContents = styled.span`
   display: flex;
   align-items: center;
 
-  @media only screen and (max-width: 450px) {
+  /* @media only screen and (max-width: 450px) {
     flex-direction: column;
-  }
+  } */
 `
 
 const SocialLogo = css`
@@ -42,47 +42,66 @@ const SocialLogo = css`
   }
 `
 
-const SongInfo = ({ name, appleMusicUrl, youtubeUrl, spotifyUrl }) => {
+const Break = styled.hr`
+  margin: 20px 0px;
+  background: #000;
+  height: 1px;
+  border: none;
+  width: 100%;
+  opacity: 20%;
+`
+
+const SongInfo = ({
+  name,
+  appleMusicUrl,
+  youtubeUrl,
+  spotifyUrl,
+  lastSong,
+}) => {
   const [songTitleFadeStyle, titleDomRef] = useFadeIn(1.5, 'left')
   const [songLinksFadeStyle, linksDomRef] = useFadeIn(1.5, 'right')
+  const iconContainerStyle = { paddingLeft: 8, paddingRight: 8 }
 
   return (
-    <Song>
-      <h4 ref={titleDomRef} css={songTitleFadeStyle}>
-        {name}
-      </h4>
-      <div ref={linksDomRef} css={songLinksFadeStyle}>
-        <SongContents>
-          {spotifyUrl && (
-            <Tooltip label="Listen on Spotify">
-              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
-                <ExternalLink to={spotifyUrl}>
-                  <SpotifyLogo css={SocialLogo} />
-                </ExternalLink>
-              </span>
-            </Tooltip>
-          )}
-          {appleMusicUrl && (
-            <Tooltip label="Listen on Apple Music">
-              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
-                <ExternalLink to={appleMusicUrl}>
-                  <AppleLogo css={SocialLogo} />
-                </ExternalLink>
-              </span>
-            </Tooltip>
-          )}
-          {youtubeUrl && (
-            <Tooltip label="Watch on YouTube">
-              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
-                <ExternalLink to={youtubeUrl}>
-                  <YouTubeLogo css={SocialLogo} />
-                </ExternalLink>
-              </span>
-            </Tooltip>
-          )}
-        </SongContents>
-      </div>
-    </Song>
+    <>
+      <Song>
+        <h4 ref={titleDomRef} css={songTitleFadeStyle}>
+          {name}
+        </h4>
+        <div ref={linksDomRef} css={songLinksFadeStyle}>
+          <SongContents>
+            {spotifyUrl && (
+              <Tooltip label="Listen on Spotify">
+                <span style={iconContainerStyle}>
+                  <ExternalLink to={spotifyUrl}>
+                    <SpotifyLogo css={SocialLogo} />
+                  </ExternalLink>
+                </span>
+              </Tooltip>
+            )}
+            {appleMusicUrl && (
+              <Tooltip label="Listen on Apple Music">
+                <span style={iconContainerStyle}>
+                  <ExternalLink to={appleMusicUrl}>
+                    <AppleLogo css={SocialLogo} />
+                  </ExternalLink>
+                </span>
+              </Tooltip>
+            )}
+            {youtubeUrl && (
+              <Tooltip label="Watch on YouTube">
+                <span style={iconContainerStyle}>
+                  <ExternalLink to={youtubeUrl}>
+                    <YouTubeLogo css={SocialLogo} />
+                  </ExternalLink>
+                </span>
+              </Tooltip>
+            )}
+          </SongContents>
+        </div>
+      </Song>
+      {!lastSong && <Break />}
+    </>
   )
 }
 
@@ -114,7 +133,10 @@ function Songs() {
     .filter(({ published }) => published === true)
     .sort((s1, s2) => (s1.name > s2.name ? 1 : -1))
 
-  return songsInfo.map((info) => <SongInfo key={info.name} {...info} />)
+  return songsInfo.map((info, i) => {
+    const lastSong = i === songsInfo.length - 1
+    return <SongInfo key={info.name} lastSong={lastSong} {...info} />
+  })
 }
 
 export default Songs
