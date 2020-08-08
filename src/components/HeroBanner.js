@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import HamburgerMenu from './HamburgerMenu'
+import { LocationAwareLink } from './Links'
 import ModalMenu from './ModalMenu'
 import SocialLinks from './SocialLinks'
-import { LocationAwareLink } from './Links'
+import useFadeIn from './FadeIn'
 
 import PYTLogo from '../assets/img/PrettyYoungThangLogo.png'
 
@@ -76,48 +78,51 @@ const MENU_ITEMS = [
     to: '/#songs',
   },
   {
-    name: "Featured Videos",
-    to: "/#featured-video"
+    name: 'Featured Videos',
+    to: '/#featured-video',
   },
   {
-    name: "Contact Us",
-    to: "/#contact-us"
-  }
+    name: 'Contact Us',
+    to: '/#contact-us',
+  },
 ]
 
 function HeroBanner() {
   const [menuModalOpen, setMenuModalOpen] = React.useState(false)
+  const [bannerFadeStyle, bannerDomRef] = useFadeIn(3)
   return (
-    <LogoHeroBanner>
-      <Header>
-        <HamburgerMenu
-          active={menuModalOpen}
-          onClick={() => setMenuModalOpen(!menuModalOpen)}
-        />
-        <ModalMenu open={menuModalOpen}>
-          <MenuModelItemsContainer>
-            {MENU_ITEMS.map(({ name, to }, index) => (
-              <ItemPadding key={`${name}-${index}`}>
-                <LocationAwareLink
-                  to={to}
-                  onClick={() => setMenuModalOpen(false)}
-                >
-                  {name}
-                </LocationAwareLink>
-              </ItemPadding>
-            ))}
-            <SocialLinksContainer>
-              <SocialLinks />
-            </SocialLinksContainer>
-          </MenuModelItemsContainer>
-        </ModalMenu>
-      </Header>
-      <SocialsAnchor>
-        <SocialsContainer>
-          <SocialLinks />
-        </SocialsContainer>
-      </SocialsAnchor>
-    </LogoHeroBanner>
+    <div css={bannerFadeStyle} ref={bannerDomRef}>
+      <LogoHeroBanner>
+        <Header>
+          <HamburgerMenu
+            active={menuModalOpen}
+            onClick={() => setMenuModalOpen(!menuModalOpen)}
+          />
+          <ModalMenu open={menuModalOpen}>
+            <MenuModelItemsContainer>
+              {MENU_ITEMS.map(({ name, to }, index) => (
+                <ItemPadding key={`${name}-${index}`}>
+                  <LocationAwareLink
+                    to={to}
+                    onClick={() => setMenuModalOpen(false)}
+                  >
+                    {name}
+                  </LocationAwareLink>
+                </ItemPadding>
+              ))}
+              <SocialLinksContainer>
+                <SocialLinks />
+              </SocialLinksContainer>
+            </MenuModelItemsContainer>
+          </ModalMenu>
+        </Header>
+        <SocialsAnchor>
+          <SocialsContainer>
+            <SocialLinks />
+          </SocialsContainer>
+        </SocialsAnchor>
+      </LogoHeroBanner>
+    </div>
   )
 }
 

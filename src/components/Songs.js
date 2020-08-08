@@ -4,7 +4,8 @@ import styled, { css } from 'styled-components'
 import Tooltip from '@reach/tooltip'
 import '@reach/tooltip/styles.css'
 
-import { ExternalLink } from '../components/Links'
+import { ExternalLink } from './Links'
+import useFadeIn from './FadeIn'
 import AppleLogo from '../assets/svg/apple.inline.svg'
 import SpotifyLogo from '../assets/svg/spotify.inline.svg'
 import YouTubeLogo from '../assets/svg/youtube.inline.svg'
@@ -41,6 +42,50 @@ const SocialLogo = css`
   }
 `
 
+const SongInfo = ({ name, appleMusicUrl, youtubeUrl, spotifyUrl }) => {
+  const [songTitleFadeStyle, titleDomRef] = useFadeIn(1.5, 'left')
+  const [songLinksFadeStyle, linksDomRef] = useFadeIn(1.5, 'right')
+
+  return (
+    <Song>
+      <h4 ref={titleDomRef} css={songTitleFadeStyle}>
+        {name}
+      </h4>
+      <div ref={linksDomRef} css={songLinksFadeStyle}>
+        <SongContents>
+          {spotifyUrl && (
+            <Tooltip label="Listen on Spotify">
+              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
+                <ExternalLink to={spotifyUrl}>
+                  <SpotifyLogo css={SocialLogo} />
+                </ExternalLink>
+              </span>
+            </Tooltip>
+          )}
+          {appleMusicUrl && (
+            <Tooltip label="Listen on Apple Music">
+              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
+                <ExternalLink to={appleMusicUrl}>
+                  <AppleLogo css={SocialLogo} />
+                </ExternalLink>
+              </span>
+            </Tooltip>
+          )}
+          {youtubeUrl && (
+            <Tooltip label="Watch on YouTube">
+              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
+                <ExternalLink to={youtubeUrl}>
+                  <YouTubeLogo css={SocialLogo} />
+                </ExternalLink>
+              </span>
+            </Tooltip>
+          )}
+        </SongContents>
+      </div>
+    </Song>
+  )
+}
+
 function Songs() {
   const data = useStaticQuery(graphql`
     query Songs {
@@ -67,43 +112,9 @@ function Songs() {
   const songsInfo = data.allMarkdownRemark.edges
     .map(({ node }) => node.frontmatter)
     .filter(({ published }) => published === true)
-    .sort((s1, s2) => s1.name > s2.name ? 1 : -1)
+    .sort((s1, s2) => (s1.name > s2.name ? 1 : -1))
 
-  return songsInfo.map(({ name, appleMusicUrl, youtubeUrl, spotifyUrl }) => {
-    return (
-      <Song key={name}>
-        <h4>{name}</h4>
-        <SongContents>
-          {spotifyUrl &&
-            <Tooltip label="Listen on Spotify">
-              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
-                <ExternalLink to={spotifyUrl}>
-                  <SpotifyLogo css={SocialLogo} />
-                </ExternalLink>
-              </span>
-            </Tooltip>
-          }
-          {appleMusicUrl &&
-            <Tooltip label="Listen on Apple Music">
-              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
-                <ExternalLink to={appleMusicUrl}>
-                  <AppleLogo css={SocialLogo} />
-                </ExternalLink>
-              </span>
-            </Tooltip>
-          }
-          {youtubeUrl &&
-            <Tooltip label="Watch on YouTube">
-              <span style={{ paddingLeft: 18, paddingTop: 18 }}>
-                <ExternalLink to={youtubeUrl}>
-                  <YouTubeLogo css={SocialLogo} />
-                </ExternalLink>
-              </span>
-            </Tooltip>
-          }
-        </SongContents>
-      </Song>
-    )})
-  }
+  return songsInfo.map((info) => <SongInfo key={info.name} {...info} />)
+}
 
 export default Songs
